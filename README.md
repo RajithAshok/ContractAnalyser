@@ -8,6 +8,7 @@ Built as a multi-agent RAG pipeline that extracts clauses, scores risk, compares
 
 ## Demo
 
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/b293293b-0a23-4380-9d02-ad8ee5c47f79" />
 
 
 ---
@@ -33,16 +34,16 @@ The system uses a **router agent** that classifies the user's intent and dispatc
 User input
     │
     ▼
-┌─────────────────────────────────────────┐
-│            Router Agent                 │
+┌────────────────────────────────────────┐
+│            Router Agent                │
 │   (classifies intent → picks tool)     │
-└────┬──────────┬──────────┬─────────────┘
+└────┬──────────┬──────────┬──────────┬──┘
      │          │          │          │
      ▼          ▼          ▼          ▼
 Extractor   Risk        Comparator  Q&A Agent
 Agent       Scorer      Agent       (RAG)
      │          │          │          │
-     └──────────┴──────────┴──────────┘
+     └──────────┴─────┬────┴──────────┘
                       │
               ChromaDB vector store
               (local embeddings via
@@ -51,9 +52,9 @@ Agent       Scorer      Agent       (RAG)
 
 **Design decisions worth noting:**
 
-- **Semantic chunking** — the chunker splits on legal section boundaries (numbered headings, `ARTICLE`, `CLAUSE`, etc.) before falling back to sentence-aware overlap. This keeps clause context intact across chunk boundaries, which meaningfully improves retrieval precision compared to naive fixed-size splitting.
-- **Structured JSON output** — every agent prompts the LLM to return a strict JSON schema, validated with Pydantic. Malformed responses are caught and recovered from rather than crashing.
-- **Local-only stack** — no data leaves the machine. Embeddings use `all-MiniLM-L6-v2` (~90MB, downloaded once), the vector store is a persistent ChromaDB on disk, and the LLM runs through Ollama.
+- **Semantic chunking**: The chunker splits on legal section boundaries (numbered headings, `ARTICLE`, `CLAUSE`, etc.) before falling back to sentence-aware overlap. This keeps clause context intact across chunk boundaries, which meaningfully improves retrieval precision compared to naive fixed-size splitting.
+- **Structured JSON output**: Every agent prompts the LLM to return a strict JSON schema, validated with Pydantic. Malformed responses are caught and recovered from rather than crashing.
+- **Local-only stack**: No data leaves the machine. Embeddings use `all-MiniLM-L6-v2` (~90MB, downloaded once), the vector store is a persistent ChromaDB on disk, and the LLM runs through Ollama.
 
 ---
 
