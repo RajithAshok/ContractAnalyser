@@ -1,0 +1,91 @@
+SAAS SUBSCRIPTION AGREEMENT
+
+This SaaS Subscription Agreement ("Agreement") is entered into as of March 1, 2024,
+between CloudPlatform Inc, a Delaware corporation ("Provider"), and Enterprise Client GmbH,
+a German company ("Customer").
+
+1. SERVICES AND ACCESS
+
+Provider shall make the CloudPlatform service ("Service") available to Customer subject to
+the terms of this Agreement. Provider grants Customer a limited, non-exclusive,
+non-transferable, non-sublicensable right to access and use the Service solely for Customer's
+internal business operations during the Subscription Term.
+
+Provider reserves the right to modify, suspend, or discontinue any feature of the Service
+at any time without notice. Provider may update these terms unilaterally at any time by
+posting updated terms to its website; continued use of the Service constitutes acceptance.
+
+2. FEES, PAYMENT, AND PRICE INCREASES
+
+Customer shall pay the fees set forth in the applicable Order Form. All fees are
+non-refundable under all circumstances, including early termination. Provider may increase
+subscription fees at any time upon thirty (30) days written notice. Late payments shall
+accrue interest at the rate of 2% per month (24% annually) from the due date.
+
+3. LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL PROVIDER, ITS AFFILIATES, OFFICERS, EMPLOYEES, AGENTS, OR LICENSORS
+BE LIABLE TO CUSTOMER FOR ANY INDIRECT, INCIDENTAL, SPECIAL, PUNITIVE, OR CONSEQUENTIAL
+DAMAGES, INCLUDING LOST PROFITS, LOST DATA, OR BUSINESS INTERRUPTION, REGARDLESS OF
+THE THEORY OF LIABILITY AND EVEN IF PROVIDER HAS BEEN ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES.
+
+PROVIDER'S TOTAL AGGREGATE LIABILITY FOR ANY CLAIMS ARISING OUT OF OR RELATED TO THIS
+AGREEMENT SHALL NOT EXCEED ONE HUNDRED DOLLARS ($100.00), REGARDLESS OF THE AMOUNT OF
+FEES PAID BY CUSTOMER. CUSTOMER AGREES THIS LIMITATION IS REASONABLE GIVEN THE FEES CHARGED.
+
+4. SERVICE LEVEL AGREEMENT
+
+Provider will use commercially reasonable efforts to maintain Service availability.
+Provider provides no uptime guarantee or SLA commitment. In the event of downtime,
+Customer's sole and exclusive remedy shall be to terminate the Agreement upon 90 days
+written notice. No service credits shall be issued for any downtime.
+
+5. DATA AND PRIVACY
+
+Customer retains ownership of Customer Data. Provider may process, analyze, and use
+Customer Data in aggregated or anonymized form for any business purpose including improving
+the Service, developing new products, and sharing with third-party analytics partners.
+Provider will implement reasonable security measures. Provider's maximum liability for
+a data breach is limited to $100 as set forth in Section 3.
+
+Customer is solely responsible for maintaining backups of Customer Data. Provider is
+not liable for any loss or corruption of Customer Data.
+
+6. INTELLECTUAL PROPERTY
+
+Provider retains all rights, title, and interest in the Service and all modifications,
+improvements, or derivative works. Any feedback, suggestions, or ideas submitted by
+Customer regarding the Service are hereby assigned to Provider and become Provider's
+sole property without compensation to Customer.
+
+7. INDEMNIFICATION
+
+Customer shall defend, indemnify, and hold harmless Provider and its affiliates from and
+against any claims, liabilities, damages, and expenses (including reasonable attorneys' fees)
+arising out of or related to: (a) Customer's use of the Service; (b) Customer's breach of
+this Agreement; (c) Customer Data; or (d) any third-party claims related to Customer's
+business. Provider has no indemnification obligations to Customer.
+
+8. TERMINATION
+
+Provider may terminate this Agreement or suspend Customer's access immediately and without
+notice for any reason at Provider's sole discretion. Customer may terminate this Agreement
+upon 90 days written notice, subject to payment of all fees through the end of the
+then-current Subscription Term. No refunds shall be issued upon termination.
+
+Upon termination, Customer Data will be retained for 7 days after which Provider may
+permanently delete all Customer Data without further notice.
+
+9. BINDING ARBITRATION AND CLASS ACTION WAIVER
+
+ALL DISPUTES ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL BE RESOLVED BY BINDING
+ARBITRATION UNDER THE RULES OF THE AMERICAN ARBITRATION ASSOCIATION. CUSTOMER EXPRESSLY
+WAIVES ANY RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION.
+ARBITRATION SHALL TAKE PLACE IN SAN FRANCISCO, CALIFORNIA. CUSTOMER WAIVES THE RIGHT TO
+A JURY TRIAL.
+
+10. GOVERNING LAW
+
+This Agreement shall be governed by the laws of California without regard to conflicts
+of law provisions.
