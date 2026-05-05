@@ -12,7 +12,7 @@ from typing import Optional
 OLLAMA_BASE = "http://localhost:11434"
 
 # Ordered preference list — first available model wins
-PREFERRED_MODELS = ["llama3.2", "llama3.1", "mistral", "llama2", "phi3"]
+PREFERRED_MODELS = ["llama3.2:1b", "llama3.2", "llama3.1", "mistral", "llama2", "phi3"]
 
 
 def get_available_model() -> str:
