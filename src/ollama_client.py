@@ -7,31 +7,35 @@ import json
 import re
 import httpx
 from typing import Optional
+import os
 
-
-OLLAMA_BASE = "http://localhost:11434"
+#OLLAMA_BASE = "http://localhost:11434"
+OLLAMA_BASE = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 
 # Ordered preference list — first available model wins
 PREFERRED_MODELS = ["llama3.2:1b", "llama3.2", "llama3.1", "mistral", "llama2", "phi3"]
 
+MODEL_OPTIONS = {
+    "num_ctx": 4096,
+    "num_thread": 4,
+}
 
 def get_available_model() -> str:
     """Return the first preferred model that Ollama has downloaded."""
     try:
         r = httpx.get(f"{OLLAMA_BASE}/api/tags", timeout=5)
         r.raise_for_status()
-        downloaded = {m["name"].split(":")[0] for m in r.json().get("models", [])}
+        downloaded = {m["name"] for m in r.json().get("models", [])}
+
         for m in PREFERRED_MODELS:
             if m in downloaded:
                 return m
-        # Fall back to whatever is available
+
         if downloaded:
             return next(iter(downloaded))
-        raise RuntimeError("No models found. Run: ollama pull llama3.2")
+        raise RuntimeError("No models found. Run:  ollama pull llama3.2:1b")
     except httpx.ConnectError:
-        raise RuntimeError(
-            "Cannot connect to Ollama. Make sure it is running: ollama serve"
-        )
+        raise RuntimeError("Cannot connect to Ollama. Start it with:  ollama serve")
 
 
 def chat(
@@ -63,11 +67,12 @@ def chat(
         )
     messages.append({"role": "user", "content": user_content})
 
+    options = {**MODEL_OPTIONS, "temperature": temperature}
     payload = {
         "model": model,
         "messages": messages,
         "stream": False,
-        "options": {"temperature": temperature},
+        "options": options,
     }
 
     try:

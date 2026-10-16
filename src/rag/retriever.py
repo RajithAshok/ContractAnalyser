@@ -10,17 +10,25 @@ from chromadb.config import Settings
 from pathlib import Path
 from src.models import RAGChunk
 from src.rag.embedder import embed_texts, embed_query
-
+import os
 
 DB_PATH = Path(".chroma_db")
 COLLECTION_NAME = "contracts"
 
 
 def _get_collection() -> chromadb.Collection:
-    client = chromadb.PersistentClient(
-        path=str(DB_PATH),
-        settings=Settings(anonymized_telemetry=False),
-    )
+    chroma_host = os.getenv("CHROMA_HOST")
+    if chroma_host:
+        client = chromadb.HttpClient(
+            host=chroma_host.replace("http://", "").split(":")[0],
+            port=int(chroma_host.split(":")[-1]),
+            settings=Settings(anonymized_telemetry=False),
+        )
+    else:
+        client = chromadb.PersistentClient(
+            path=str(DB_PATH),
+            settings=Settings(anonymized_telemetry=False),
+        )
     return client.get_or_create_collection(
         name=COLLECTION_NAME,
         metadata={"hnsw:space": "cosine"},

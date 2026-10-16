@@ -36,28 +36,27 @@ def extract_clauses(contract_text: str, doc_name: str) -> ExtractionResult:
     # Truncate very long contracts to fit context window
     truncated = contract_text[:12000] if len(contract_text) > 12000 else contract_text
 
-    prompt = f"""Analyze this contract and extract all significant clauses.
+    prompt = f"""Extract the most important clauses from this contract. Return max 6 clauses.
 
-CONTRACT TEXT:
+CONTRACT:
 {truncated}
 
-Return a JSON object with this exact schema:
+Return this JSON only:
 {{
   "clauses": [
     {{
-      "clause_type": "string",
-      "text": "string (max 300 chars)",
-      "section_ref": "string or null",
-      "risk_score": integer 0-10,
-      "risk_level": "low" | "medium" | "high",
-      "risk_reason": "string or null"
+      "clause_type": "Liability|Termination|IP Assignment|Payment|Non-Compete|Arbitration|Confidentiality|Governing Law|Other",
+      "text": "max 100 chars",
+      "section_ref": null,
+      "risk_score": 5,
+      "risk_level": "medium",
+      "risk_reason": null
     }}
   ],
-  "summary": "2-3 sentence plain-English summary of what this contract is and its key terms",
-  "overall_risk": "low" | "medium" | "high",
-  "overall_risk_score": float 0-10
-}}
-"""
+  "summary": "one sentence",
+  "overall_risk": "medium",
+  "overall_risk_score": 5.0
+}}"""
 
     raw = ollama_client.chat(prompt, system=SYSTEM_PROMPT, expect_json=True, temperature=0.05)
     data = ollama_client.parse_json_response(raw)
