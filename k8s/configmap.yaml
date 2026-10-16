@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: contract-analyzer-config
+  namespace: contract-analyzer
+data:
+  OLLAMA_HOST: "http://ollama:11434"
+  CHROMA_HOST: "http://chromadb:8000"
+  MODEL_NAME: "llama3.2:1b"
+  NUM_CTX: "4096"
+  NUM_THREAD: "4"

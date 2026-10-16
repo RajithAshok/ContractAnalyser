@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contract-analyzer
+  namespace: contract-analyzer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contract-analyzer
+  template:
+    metadata:
+      labels:
+        app: contract-analyzer
+    spec:
+      containers:
+        - name: contract-analyzer
+          image: contract-analyzer:latest
+          imagePullPolicy: Never
+          stdin: true
+          tty: true
+          envFrom:
+            - configMapRef:
+                name: contract-analyzer-config
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: contracts
+              mountPath: /app/contracts
+      volumes:
+        - name: contracts
+          hostPath:
+            path: /contracts
+            type: DirectoryOrCreate
