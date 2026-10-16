@@ -61,28 +61,39 @@ Return a JSON object with this exact schema:
 
     raw = ollama_client.chat(prompt, system=SYSTEM_PROMPT, expect_json=True, temperature=0.05)
     data = ollama_client.parse_json_response(raw)
-    #print(f"Type: {type(data)}, Value: {data}")
-    # clauses = [Clause(**c) for c in data.get("clauses", [])]
-    # overall_score = float(data.get("overall_risk_score", 0))
-    # overall_risk = RiskLevel(data.get("overall_risk", "low"))
 
-    clauses = [Clause(**c) for c in data]
-    scores = [c.get("risk_score", 0) for c in data]
-    overall_score = float(sum(scores) / len(scores)) if scores else 0.0
-    risk_values = [c.get("risk_level", "low") for c in data]
+    # Handle model returning a bare list instead of the expected object
+    if isinstance(data, list):
+        data = {"clauses": data, "summary": "", "overall_risk": "low", "overall_risk_score": 0}
 
-    if "high" in risk_values:
-        overall_risk = RiskLevel("high")
-    elif "medium" in risk_values:
-        overall_risk = RiskLevel("medium")
-    else:
-        overall_risk = RiskLevel("low")
+    raw_clauses = data.get("clauses", [])
+    if not isinstance(raw_clauses, list):
+        raw_clauses = []
 
-    #summary=data.get("summary", ""),
+    clauses = []
+    for c in raw_clauses:
+        # Skip if the model returned a string instead of a dict
+        if not isinstance(c, dict):
+            continue
+        # Clamp risk_score to valid range
+        c["risk_score"] = max(0, min(10, int(c.get("risk_score", 0))))
+        try:
+            clauses.append(Clause(**c))
+        except Exception:
+            pass  # Skip malformed clause rather than crashing
+
+    overall_score = float(data.get("overall_risk_score", 0))
+    overall_score = max(0.0, min(10.0, overall_score))
+
+    try:
+        overall_risk = RiskLevel(data.get("overall_risk", "low"))
+    except ValueError:
+        overall_risk = RiskLevel.LOW
+
     return ExtractionResult(
         document_name=doc_name,
         clauses=clauses,
-        summary = "Document contains: " + ", ".join([c.get("clause_type", "") for c in data]),
+        summary=data.get("summary", ""),
         overall_risk=overall_risk,
         overall_risk_score=round(overall_score, 1),
     )
